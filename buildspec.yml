@@ -10,7 +10,9 @@ phases:
       - echo Logging in to Docker Hub...
       - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
       # - echo Pulling Docker Images for cache...
-      # - docker-compose pull --ignore-pull-failures -q
+      - docker pull hjun121345/docker-frontend
+      - docker pull hjun121345/docker-backend
+      - docker pull hjun121345/docker-nginx
   build:
     commands:
       - echo Build started on `date`
