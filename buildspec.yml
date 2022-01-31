@@ -7,8 +7,6 @@ env:
 phases:
   pre_build:
     commands:
-      - echo Logging into Amazon ECR...
-      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - echo Pulling Docker Images for cache...
       - docker-compose pull --ignore-pull-failures -q
   build:
