@@ -22,7 +22,7 @@ phases:
     commands:
       - docker push hjun121345/docker-frontend
       - docker push hjun121345/docker-backend
-      - docker push hjun121345/docker-ngnix
+      - docker push hjun121345/docker-nginx
 
 artifacts:
   files:
