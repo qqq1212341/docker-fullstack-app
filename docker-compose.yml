@@ -2,8 +2,8 @@ version: "3"
 services:
   frontend:
     build:
-      dockerfile: Dockerfile.dev
       context: ./frontend
+      dockerfile: Dockerfile.dev
     volumes:
       - /app/node_modules
       - ./frontend:/app
@@ -12,15 +12,15 @@ services:
   nginx:
     restart: always
     build:
-      dockerfile: Dockerfile
       context: ./nginx
+      dockerfile: Dockerfile
     ports:
       - "3000:80"
 
   backend:
     build:
-      dockerfile: Dockerfile.dev
       context: ./backend
+      dockerfile: Dockerfile.dev
     container_name: app_backend
     volumes:
       - /app/node_modules
