@@ -7,14 +7,22 @@ env:
 phases:
   pre_build:
     commands:
-      - echo Pulling Docker Images for cache...
-      - docker-compose pull --ignore-pull-failures -q
+      - echo Logging in to Docker Hub...
+      - docker login -u "$DOCKER_HUB_ID" --password-stdin
+      # - echo Pulling Docker Images for cache...
+      # - docker-compose pull --ignore-pull-failures -q
   build:
     commands:
-      - docker-compose build
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t hjun/docker-frontend ./frontend
+      - docker build -t hjun/docker-backend ./backend
+      - docker build -t hjun/docker-ngnix ./ngnix
   post_build:
     commands:
-      - docker-compose push
+      - docker push hjun/docker-frontend
+      - docker push hjun/docker-backend
+      - docker push hjun/docker-ngnix
 
 artifacts:
   files:
