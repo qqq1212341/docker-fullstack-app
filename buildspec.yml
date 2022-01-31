@@ -1,0 +1,23 @@
+version: 0.2 # build spec version
+
+env:
+  variables:
+    AWS_DEFAULT_REGION: "ap-northeast-2"
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging into Amazon ECR...
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - echo Pulling Docker Images for cache...
+      - docker-compose pull --ignore-pull-failures -q
+  build:
+    commands:
+      - docker-compose build
+  post_build:
+    commands:
+      - docker-compose push
+
+artifacts:
+  files:
+    - "./**/*"
